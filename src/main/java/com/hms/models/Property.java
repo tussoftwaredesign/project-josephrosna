@@ -6,12 +6,38 @@
 package com.hms.models;
 
 /**
- * Property class represents the details of a property in the rental system.
- * It includes the property address, rent price, and availability.
- */
-public class Property {
+ *  Sealed class demonstrating sealed interfaces and inheritance
+ *  It includes the property address, rent price, and availability.
+ **/
+
+public sealed class Property permits Apartment, House {
     private String address;
     private double rentPrice;
     private boolean isAvailable;
 
+    // Constructor
+    public Property(String address, double rentPrice, boolean isAvailable) {
+        this.address = address;
+        this.rentPrice = rentPrice;
+        this.isAvailable = isAvailable;
+    }
+
+    // Getters
+    public String getAddress() {
+        return address;
+    }
+
+    public double getRentPrice() {
+        return rentPrice;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return "Address: " + address + ", Rent: " + rentPrice + ", Available: " + isAvailable;
+    }
 }
+
