@@ -29,7 +29,7 @@ public record RentalAgreement(Tenant tenant, Property property, LocalDate startD
                 "Tenant: " + tenant.getName() + "\n" +
                 "Landlord: " + landlord.getName() + "\n" +
                 "Property: " + property.getAddress() + "\n" +
-                "Rent Amount: $" + rentAmount + "\n" +
+                "Rent Amount: €" + rentAmount + "\n" +
                 "Start Date: " + startDate + "\n" +
                 "End Date: " + endDate;
     }

@@ -201,7 +201,7 @@ public class Main {
     private static void makePayment(Tenant tenant) {
         double amount = Utility.readDouble("Enter the amount to pay: ");
         if (Utility.validateInput(amount, val -> val > 0, "Payment amount must be greater than zero.")) {
-            System.out.println("Payment of $" + amount + " made successfully!");
+            System.out.println("Payment of €" + amount + " made successfully!");
         }
     }
 

@@ -77,7 +77,7 @@ public sealed class Property implements PropertyInterface permits Apartment, Hou
 
     @Override
     public String toString() {
-        return "Property ID: " + id + ", Address: " + address + ", Rent Price: $" + rentPrice 
+        return "Property ID: " + id + ", Address: " + address + ", Rent Price: €" + rentPrice 
                 + ", Available: " + (isAvailable ? "Yes" : "No") + ", Property Type: " + propertyType 
                 + ", Landlord ID: " + landlordId;
     }
