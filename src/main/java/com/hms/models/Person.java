@@ -1,7 +1,16 @@
-package com.hms.models;
-// Person.java (Superclass to demonstrate inheritance, encapsulation, and polymorphism)
+/**
+ * House Rental Management System
+ * Developer: Rosna Joseph
+ * This system manages house rental listings and tenants using modern Java 21 features.
+ * */
 
-// Demonstrates encapsulation by using private fields with public getters and setters (Item 2)
+ package com.hms.models;
+
+ /**
+  * Superclass to demonstrate inheritance, encapsulation, and polymorphism
+  * Demonstrates encapsulation by using private fields with public getters and setters (Feature 2)
+  **/
+// 
 public class Person {
     private String name;
 
@@ -10,17 +19,17 @@ public class Person {
         this.name = name;
     }
 
-    // Getter for name (Encapsulation - Item 2)
+    // Getter for name (Encapsulation - Feature 2)
     public String getName() {
         return name;
     }
 
-    // Setter for name (Encapsulation - Item 2)
+    // Setter for name (Encapsulation - Feature 2)
     public void setName(String name) {
         this.name = name;
     }
 
-    // Method to display details (Polymorphism - Item 4.1)
+    // Method to display details (Polymorphism - Feature 4.1)
     public void displayDetails() {
         System.out.println("Name: " + name);
     }
