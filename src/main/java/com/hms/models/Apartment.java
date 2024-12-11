@@ -9,19 +9,21 @@ package com.hms.models;
  *  Final class to demonstrate sealed class implementation
  *  It includes the property address, rent price, and availability.
  **/
-
-
 public final class Apartment extends Property {
     private int floorNumber;
 
-    // Constructor
-    public Apartment(String address, double rentPrice, boolean isAvailable, int floorNumber) {
-        super(address, rentPrice, isAvailable);  // Calls superclass constructor
+    public Apartment(int id, String address, double rentPrice, boolean isAvailable, PropertyType propertyType,
+            int floorNumber,int landlordId) {
+        super(id,address, rentPrice, isAvailable, propertyType,landlordId); // Calls superclass constructor
         this.floorNumber = floorNumber;
     }
 
-    // Getter for floor number
     public int getFloorNumber() {
         return floorNumber;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Floor Number: " + floorNumber;
     }
 }
