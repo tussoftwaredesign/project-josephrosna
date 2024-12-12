@@ -162,3 +162,20 @@ The main class demonstrates the application functionality and allows users to in
 
 ### PropertyNotFoundException.java
 - **Checked Exceptions**: Demonstrated with `PropertyNotFoundException`.
+
+
+# Latest Java Features Used
+
+Upgraded the project to Java 23
+
+## Java 22:
+- **StructuredTaskScope**: Introduced in Java 22 to simplify structured concurrency, allowing tasks to be managed easily
+
+## Java 23:
+- **Virtual Threads**: Improved structured concurrency by using virtual threads to execute tasks concurrently with low overhead.
+- **Scoped Values**: Provides a thread-safe way to pass context across methods and tasks, ensuring clean, isolated handling of data.
+
+### Methods
+- **calculateYearlyRent(double monthlyRent)**: Calculates yearly rent.
+- **calculateYearlyRentForProperties(Map<String, Double> properties)**: Calculates yearly rent for multiple properties concurrently.
+- **calculateYearlyRentForTenant(String tenantName, double monthlyRent)**: Calculates yearly rent within a tenant's context using scoped values.
