@@ -8,20 +8,32 @@
  */
 package com.hms;
 
-import com.hms.models.*;
-import com.hms.services.*;
-import com.hms.exceptions.*;
-import com.hms.utils.*;
-
 import java.time.LocalDate; // Java Date-Time API -- Feature 8.4
+import java.util.LinkedHashMap;
 import java.util.List; // Java List interface -- Feature 8.3
+import java.util.Map;
+
+import com.hms.exceptions.LandlordNotFoundException;
+import com.hms.exceptions.PropertyNotFoundException;
+import com.hms.models.ImmutableProperty;
+import com.hms.models.Landlord;
+import com.hms.models.Property;
+import com.hms.models.PropertyInterface;
+import com.hms.models.RentalAgreement;
+import com.hms.models.Tenant;
+import com.hms.services.RentalService;
+import com.hms.services.YearlyRentCalculatorService;
+import com.hms.utils.Utility;
 
 public class Main {
     private static RentalService rentalService = new RentalService();
+    private static YearlyRentCalculatorService yearlyRentCalculatorService = new YearlyRentCalculatorService();
 
     public static void main(String[] args) {
+       
 
-        System.out.println("Welcome to the House Rental Management System!");
+        
+        System.out.println("Welcome to the House Rental Management System");
         System.out.println("Browse through the available properties and rent your dream home today!");
 
         // Initialize few users and properties to demonstrate the system
@@ -37,7 +49,7 @@ public class Main {
 
         // Main menu
         while (true) {
-            int choice = Utility.displayMenu("Login as:", "Tenant", "Landlord", "Exit");
+            int choice = Utility.displayMenu("Login as:", "Tenant", "Landlord","Rent Calculator", "Exit");
 
             switch (choice) {
                 case 1:
@@ -47,6 +59,9 @@ public class Main {
                     handleLandlordMenu();
                     break;
                 case 3:
+                     handleLatestJavaFeatures();
+                     break;
+                case 4:
                     System.out.println("Thank you for using the House Rental Management System Goodbye!");
                     return;
                 default:
@@ -133,7 +148,32 @@ public class Main {
             }
         }
     }
+    private static void handleLatestJavaFeatures()
+    {
+       
+        System.out.println("Explore the latest Java features in this section.");
 
+        while (true) {
+            int choice = Utility.displayMenu("Choose a feature to explore:", "Yearly Rent Calculator",
+                    "Yearly Rent Calculator for Properties", "Yearly Rent Calculator for Tenant", "Exit");
+            switch (choice) {
+                case 1:
+                    calculateYearlyRent();
+                    break;
+                case 2:
+                    calculateYearlyRentForProperties();
+                    break;
+                case 3:
+                    calculateYearlyRentForTenant();
+                    break;
+                case 4:
+                    System.out.println("Exiting Latest Java Features Section...");
+                    return;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
     // Feature 9 - Defensive Copying
     private static void copyProperty(Landlord landlord) {
         try {
@@ -201,7 +241,7 @@ public class Main {
     private static void makePayment(Tenant tenant) {
         double amount = Utility.readDouble("Enter the amount to pay: ");
         if (Utility.validateInput(amount, val -> val > 0, "Payment amount must be greater than zero.")) {
-            System.out.println("Payment of €" + amount + " made successfully!");
+            System.out.println("Payment of EUR:  " + amount + " made successfully!");
         }
     }
 
@@ -262,4 +302,36 @@ public class Main {
             System.err.println("Error: The property is immutable and cannot be changed.");
         }
     }
+
+    private static void calculateYearlyRent() {
+        double monthlyRent = Utility.readDouble("Enter the monthly rent: ");
+        double yearlyRent = yearlyRentCalculatorService.calculateYearlyRent(monthlyRent);
+        System.out.println("Yearly Rent:  EUR:  " + yearlyRent);
+    }
+    private static void calculateYearlyRentForProperties() {
+        int propertyCount = Utility.readInt("Enter the number of properties: ");
+        Map<String, Double> properties = new LinkedHashMap<>();
+        for (int i = 0; i < propertyCount; i++) {
+            String propertyName = Utility.readString("Enter property name: ");
+            double propertyMonthlyRent = Utility.readDouble("Enter monthly rent for " + propertyName + ": ");
+            properties.put(propertyName, propertyMonthlyRent);
+        }
+        try {
+            Map<String, Double> yearlyRents = yearlyRentCalculatorService.calculateYearlyRentForProperties(properties);
+            yearlyRents.forEach((property, rent) -> {
+                System.out.println(property + " - Yearly Rent:  EUR:  " + rent);
+            });
+        } catch (Exception ex) {
+            System.err.println("An error occurred: " + ex.getMessage());
+        }
+    }
+    private static void calculateYearlyRentForTenant() {
+        String tenantName = Utility.readString("Enter tenant name: ");
+        double tenantMonthlyRent = Utility.readDouble("Enter monthly rent for tenant's property: ");
+        double tenantYearlyRent = yearlyRentCalculatorService.calculateYearlyRentForTenant(tenantName, tenantMonthlyRent);
+        System.out.println("Yearly Rent for tenant " + tenantName + ": EUR:  " + tenantYearlyRent);
+    }
+
+    
+
 }
