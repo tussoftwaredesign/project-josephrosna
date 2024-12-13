@@ -70,6 +70,8 @@ This project demonstrates various modern Java features through a House Rental Ma
 
 The main class demonstrates the application functionality and allows users to interact with the system via terminal commands.
 
+![UML Diagram](house-rental-management-uml-diagram.svg)
+
 ## Features
 
 ### 1. Classes
